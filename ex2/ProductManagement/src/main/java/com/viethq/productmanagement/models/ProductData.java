@@ -22,13 +22,24 @@ public class ProductData {
         }
         return product;
     }
-    public static boolean deleteById(int id){
+
+    public static void deleteById(int id) {
         for(Product p: productList){
             if(p.getId() == id){
                 productList.remove(p);
-                return true;
+                break;
             }
         }
-        return false;
+    }
+
+    public static void update(Product product) {
+        for (Product p : productList) {
+            if (p.getId() == product.getId()) {
+                p.setName(product.getName());
+                p.setPrice(product.getPrice());
+                p.setAmount(product.getAmount());
+                break;
+            }
+        }
     }
 }

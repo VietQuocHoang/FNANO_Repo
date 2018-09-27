@@ -8,14 +8,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
 
-    //TODO hereeeeeeee
     @GetMapping(value = "/index")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("/product/index");
@@ -34,8 +31,10 @@ public class ProductController {
         if (result.hasErrors()) {
             return "error";
         }
-        ProductData.productList.add(product);
-        return "/product/index";
+        if (ProductData.findById(product.getId()) == null) {
+            ProductData.productList.add(product);
+        }
+        return "redirect:/product/index";
     }
 
     @GetMapping(value = "/details")
@@ -47,11 +46,25 @@ public class ProductController {
     }
 
     @GetMapping(value = "/edit")
-    public String edit(@RequestParam(value = "id", required = false) int id, ModelMap mm) {
+    public ModelAndView edit(@RequestParam(value = "id", required = false) int id, ModelMap mm) {
         Product p = ProductData.findById(id);
         ModelAndView mav = new ModelAndView("/product/edit");
-        mav.addObject("product", p);
-        return "home/edit";
+        mav.getModel().put("product", p);
+        return mav;
+    }
+
+    @GetMapping(value = "/delete")
+    public ModelAndView delete(@RequestParam(value = "id", required = false) int id) {
+        ProductData.deleteById(id);
+        ModelAndView mav = new ModelAndView("redirect:/product/index");
+        return mav;
+    }
+
+
+    @PostMapping(value = "/update")
+    public String update(@ModelAttribute("product") Product product) {
+        ProductData.update(product);
+        return "redirect:/product/index";
     }
 
 }

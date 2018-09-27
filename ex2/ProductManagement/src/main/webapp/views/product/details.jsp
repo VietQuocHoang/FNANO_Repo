@@ -11,28 +11,26 @@
     <title>Product Details</title>
 </head>
 <body>
+<h2>Product details</h2>
 <table>
-    <h2>Product details</h2>
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>${product.id}</td>
+    <tr>
+        <td>ID</td>
+        <td>${product.id}</td>
 
 
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>${product.name}</td>
-        </tr>
-        <tr>
-            <td>Price</td>
-            <td>${product.price}</td>
-        </tr>
-        <tr>
-            <td>Amount</td>
-            <td>${product.amount}</td>
-        </tr>
-    </table>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td>${product.name}</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>${product.price}</td>
+    </tr>
+    <tr>
+        <td>Amount</td>
+        <td>${product.amount}</td>
+    </tr>
 </table>
 </body>
 </html>
