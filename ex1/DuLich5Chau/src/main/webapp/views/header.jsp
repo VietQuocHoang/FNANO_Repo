@@ -1,0 +1,1 @@
+<img src="${pageContext.request.contextPath}/resources/img/header.jpg" style="width:100%; height: auto"/>
