@@ -13,6 +13,8 @@
     <title>Create new student</title>
 </head>
 <body>
+<h3>Create new student</h3>
+<a href="${pageContext.request.contextPath}/student/index">Back to index</a>
 <form:form modelAttribute="student" method="post" action="${pageContext.request.contextPath}/student/create">
     <table>
         <tr>
