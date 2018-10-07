@@ -1,0 +1,39 @@
+Product (
+id,
+name,
+description,
+price,
+amount,
+thumbnail,
+categoryId,
+)
+
+Category (
+id,
+name,
+)
+
+Order (
+id,
+name,
+userId,
+)
+
+Order detail (
+id,
+orderId,
+productId,
+amount,
+)
+
+User (
+id,
+username,
+password,
+fullname,
+)
+
+Role (
+id,
+name,
+)

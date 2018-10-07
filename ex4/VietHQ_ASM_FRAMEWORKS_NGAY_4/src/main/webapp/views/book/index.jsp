@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Index</title>
@@ -27,7 +28,13 @@
             <td>${book.id}</td>
             <td>${book.name}</td>
             <td>${book.author}</td>
-            <td>${book.releaseDate}</td>
+            <td>
+                    <%--${book.releaseDate}--%>
+                    <fmt:formatDate pattern="dd-MM-yyyy" value="${book.releaseDate}" var="parsedDate"/>
+                    ${parsedDate}
+                    <%--${book.releaseDate.time}--%>
+                    <%--<fmt:formatDate value="${book.releaseDate.time}"/>--%>
+            </td>
             <td>
                 <a href="${pageContext.request.contextPath}/book/details?id=${book.id}">Details</a>
                 <a href="${pageContext.request.contextPath}/book/edit?id=${book.id}">Edit</a>
