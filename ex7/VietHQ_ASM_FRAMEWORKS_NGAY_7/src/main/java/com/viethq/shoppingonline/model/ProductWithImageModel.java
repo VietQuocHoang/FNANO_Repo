@@ -4,6 +4,10 @@ import com.viethq.shoppingonline.entities.Category;
 import com.viethq.shoppingonline.entities.Product;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ProductWithImageModel {
 
     private int id;
@@ -26,6 +30,8 @@ public class ProductWithImageModel {
         this.id = id;
     }
 
+    @NotNull
+    @Size(min = 5, max = 10)
     public String getName() {
         return name;
     }
@@ -34,6 +40,8 @@ public class ProductWithImageModel {
         this.name = name;
     }
 
+    @NotNull
+    @Size(min = 5, max = 50)
     public String getDescription() {
         return description;
     }
@@ -42,6 +50,7 @@ public class ProductWithImageModel {
         this.description = description;
     }
 
+    @DecimalMin(value = "0")
     public double getPrice() {
         return price;
     }
@@ -50,6 +59,7 @@ public class ProductWithImageModel {
         this.price = price;
     }
 
+    @DecimalMin(value = "0")
     public int getAmount() {
         return amount;
     }
@@ -73,7 +83,6 @@ public class ProductWithImageModel {
     public void setCategory(Category category) {
         this.category = category;
     }
-
 
     public String getFileName() {
         return fileName;

@@ -1,6 +1,8 @@
 package com.viethq.shoppingonline.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tblProduct")
@@ -24,6 +26,8 @@ public class Product {
         this.id = id;
     }
 
+    @NotNull
+    @Size(min = 5, max = 10)
     @Column(name = "name")
     public String getName() {
         return name;
@@ -33,8 +37,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -43,7 +45,6 @@ public class Product {
         this.description = description;
     }
 
-    @Column(name = "price")
     public double getPrice() {
         return price;
     }

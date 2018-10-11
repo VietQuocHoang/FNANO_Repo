@@ -33,6 +33,9 @@
             <td>
                 <form:input path="name"/>
             </td>
+            <td>
+                <form:errors path="name" cssStyle="color: red; display: block"/>
+            </td>
         </tr>
         <tr>
             <td>
@@ -40,6 +43,9 @@
             </td>
             <td>
                 <form:input path="description"/>
+            </td>
+            <td>
+                <form:errors path="description" cssStyle="color: red; display: block"/>
             </td>
         </tr>
         <tr>
@@ -49,6 +55,9 @@
             <td>
                 <form:input path="price"/>
             </td>
+            <td>
+                <form:errors path="price" cssStyle="color: red; display: block"/>
+            </td>
         </tr>
         <tr>
             <td>
@@ -57,13 +66,24 @@
             <td>
                 <form:input path="amount"/>
             </td>
+            <td>
+                <form:errors path="amount" cssStyle="color: red; display: block"/>
+            </td>
         </tr>
         <tr>
             <td>
                 <form:label path="thumbnail">Thumbnail: </form:label>
             </td>
             <td>
-                <img src="${pageContext.request.contextPath}/image/${product.thumbnail}" style="width: 50px; height: 50px;"/>
+                <c:choose>
+                    <c:when test="${empty product.thumbnail}">
+                        There is no thumbnail
+                    </c:when>
+                    <c:otherwise>
+                        <img src="${pageContext.request.contextPath}/image/${product.id}/${product.thumbnail}"
+                             style="width: 50px; height: 50px"/>
+                    </c:otherwise>
+                </c:choose>
                 <input name="thumbnail" type="file"/>
             </td>
         </tr>

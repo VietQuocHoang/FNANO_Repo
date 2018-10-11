@@ -24,9 +24,10 @@
         <tr>
             <td><form:label path="name">Name: </form:label></td>
             <td><form:input path="name"/></td>
+            <td><form:errors path="name" cssStyle="color: red; display: block"/></td>
         </tr>
         <tr>
-            <td>
+            <td colspan="3">
                 <button type="submit">Save</button>
             </td>
         </tr>

@@ -28,6 +28,9 @@
             <td>
                 <form:input path="name"/>
             </td>
+            <td>
+                <form:errors path="name" cssStyle="color: red; display: block"/>
+            </td>
         </tr>
         <tr>
             <td>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 <form:input path="description"/>
+            </td>
+            <td>
+                <form:errors path="description" cssStyle="color: red; display: block"/>
             </td>
         </tr>
         <tr>
@@ -44,6 +50,9 @@
             <td>
                 <form:input path="price"/>
             </td>
+            <td>
+                <form:errors path="price" cssStyle="color: red; display: block"/>
+            </td>
         </tr>
         <tr>
             <td>
@@ -51,6 +60,9 @@
             </td>
             <td>
                 <form:input path="amount"/>
+            </td>
+            <td>
+                <form:errors path="amount" cssStyle="color: red; display: block"/>
             </td>
         </tr>
         <tr>
@@ -74,7 +86,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 <button type="submit">Save</button>
             </td>
         </tr>

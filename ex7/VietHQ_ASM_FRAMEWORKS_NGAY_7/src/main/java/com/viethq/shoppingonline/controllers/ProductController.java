@@ -9,12 +9,12 @@ import com.viethq.shoppingonline.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletContext;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +29,6 @@ public class ProductController {
 
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
-    private ServletContext servletContext;
 
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
@@ -41,13 +40,8 @@ public class ProductController {
         this.categoryRepository = categoryRepository;
     }
 
-    @Autowired
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
-
     @GetMapping("/index")
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView mav = new ModelAndView("/product/index");
         List<Product> productList = productRepository.findAll();
         mav.addObject("productList", productList);
@@ -56,7 +50,7 @@ public class ProductController {
 
 
     @GetMapping("/create")
-    public ModelAndView create(){
+    public ModelAndView create() {
         ModelAndView mav = new ModelAndView("/product/create");
         List<Category> categoryList = categoryRepository.findAll();
         mav.addObject("product", new Product());
@@ -65,7 +59,7 @@ public class ProductController {
     }
 
     @GetMapping("/details")
-    public ModelAndView details(@RequestParam("id") int id){
+    public ModelAndView details(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView("/product/details");
         Product product = productRepository.findOne(id);
         mav.addObject("product", product);
@@ -73,7 +67,7 @@ public class ProductController {
     }
 
     @GetMapping("/edit")
-    public ModelAndView edit(@RequestParam("id") int id){
+    public ModelAndView edit(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView("/product/edit");
         Product product = productRepository.findOne(id);
         List<Category> categoryList = categoryRepository.findAll();
@@ -83,30 +77,84 @@ public class ProductController {
     }
 
 
-    @PostMapping(value = {"/create", "/edit"})
-    public ModelAndView save(@ModelAttribute("product") ProductWithImageModel product){
+    @PostMapping(value = "/create")
+    public ModelAndView create(@Valid @ModelAttribute("product") ProductWithImageModel product,
+                               BindingResult result) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/product/create");
+            List<Category> categoryList = categoryRepository.findAll();
+            mav.addObject("categoryList", categoryList);
+            return mav;
+        }
         ModelAndView mav = new ModelAndView("redirect:index");
         MultipartFile file = product.getThumbnail();
-//        String filePath = servletContext.getRealPath("") + File.separator + "resources" + File.separator + "img";
-        if(file != null) {
-            File imgFile = new File(IMAGE_FOLDER, file.getOriginalFilename());
-            try{
-                file.transferTo(imgFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            product.setFileName(file.getOriginalFilename());
-        }
+        product.setFileName(file.getOriginalFilename());
         Product p = product.toProduct();
+        p = productRepository.save(p);
+        product.setId(p.getId());
+        saveFile(product, file);
+        return mav;
+    }
+
+
+    @PostMapping(value = "/edit")
+    public ModelAndView edit(@Valid @ModelAttribute("product") ProductWithImageModel product,
+                             BindingResult result) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/product/edit");
+            List<Category> categoryList = categoryRepository.findAll();
+            mav.addObject("categoryList", categoryList);
+            return mav;
+        }
+        ModelAndView mav = new ModelAndView("redirect:index");
+        MultipartFile file = product.getThumbnail();
+        saveFile(product, file);
+        Product p = productRepository.findOne(product.getId());
+        p.setName(product.getName());
+        p.setDescription(product.getDescription());
+        p.setPrice(product.getPrice());
+        p.setAmount(product.getAmount());
+        p.setCategory(product.getCategory());
+        if (product.getFileName() != null && !product.getFileName().equals("")) {
+            p.setThumbnail(product.getFileName());
+        }
         productRepository.save(p);
         return mav;
     }
 
     @GetMapping("/delete")
-    public ModelAndView delete(@RequestParam("id") int id){
+    public ModelAndView delete(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView("redirect:index");
         productRepository.delete(id);
         return mav;
     }
+
+
+    private String createImgUrlCorrespondingWithProduct(ProductWithImageModel p) {
+        int id = p.getId();
+        return IMAGE_FOLDER + File.separator + id + File.separator;
+    }
+
+
+    private void saveFile(ProductWithImageModel product, MultipartFile file) {
+        if (file != null) {
+            String folderPath = createImgUrlCorrespondingWithProduct(product);
+            File imgDir = new File(folderPath);
+            if (!imgDir.exists()) {
+                imgDir.mkdir();
+            }
+            String fileName = file.getOriginalFilename();
+            if (fileName != null && !fileName.equals("")) {
+                File imgFile = new File(folderPath, file.getOriginalFilename());
+                try {
+                    file.transferTo(imgFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                product.setFileName(fileName);
+            }
+        }
+    }
+
 
 }
