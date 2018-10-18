@@ -26,12 +26,12 @@
             <c:when test="${sessionScope.cart != null && !sessionScope.cart.cartItemList.isEmpty()}">
                 <table class="table table-bordered">
                     <tr>
-                        <th>ID</th>
-                        <th>Product name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Increase/Decrease</th>
-                        <th>Remove</th>
+                        <th class="col-md-1">ID</th>
+                        <th class="col-md-6">Product name</th>
+                        <th class="col-md-1">Quantity</th>
+                        <th class="col-md-1">Price</th>
+                        <th class="col-md-2">Increase/Decrease</th>
+                        <th class="col-md-1">Remove</th>
                     </tr>
                     <c:forEach items="${sessionScope.cart.cartItemList}" var="cartItem">
                         <tr>
@@ -47,7 +47,8 @@
                             </td>
                             <td>
                                 <a class="btn btn-danger"
-                                   href="${pageContext.request.contextPath}/shop/remove?productId=${cartItem.productId}">Delete</a>
+                                   href="${pageContext.request.contextPath}/shop/remove?productId=${cartItem.productId}"><i
+                                        class="glyphicon glyphicon-trash"></i> </a>
                             </td>
                         </tr>
                     </c:forEach>
