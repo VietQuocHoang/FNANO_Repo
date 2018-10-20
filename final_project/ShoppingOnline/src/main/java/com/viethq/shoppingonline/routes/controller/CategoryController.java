@@ -76,7 +76,7 @@ public class CategoryController {
             return new ModelAndView("/category/create");
         }
         categoryRepository.save(category);
-        return new ModelAndView("redirect:index");
+        return new ModelAndView("redirect:/category/");
     }
 
     @PostMapping(value = "/edit")

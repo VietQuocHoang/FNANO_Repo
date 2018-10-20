@@ -8,10 +8,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
-
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        Category
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <c:import url="../fragments/common-css.jsp"/>
+</head>
 <body class="">
 <div class="wrapper ">
-    <c:import url="../fragments/sidebar.jsp"/>
+    <c:import url="../fragments/sidebar.jsp">
+        <c:param name="position" value="category"/>
+        <c:param name="test" value="ahihi"/>
+    </c:import>
     <div class="main-panel">
         <c:import url="../fragments/navbar.jsp">
             <c:param name="navbarBrand" value="Category"/>
@@ -109,15 +120,30 @@
                             </c:otherwise>
                         </c:choose>
 
-                        <a href="<c:url value="/category?search=${search}&page=${previousPage}"/>"
-                           class="btn btn-default btn-round btn-just-icon">
-                            <i class="material-icons">chevron_left</i>
-                        </a>
 
-                        <a href="<c:url value="/category?search=${search}&page=${nextPage}"/>"
-                           class="btn btn-default btn-round btn-just-icon">
-                            <i class="material-icons">chevron_right</i>
-                        </a>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a href="<c:url value="/category?search=${search}&page=${previousPage}"/>"
+                                   class="page-link">
+                                    <i class="material-icons">chevron_left</i>
+                                </a>
+                            </li>
+                            <c:if test="${limit > 0}">
+                                <c:forEach begin="0" end="${limit}" step="1" varStatus="status">
+                                    <li class="page-item <c:if test="${page==status.index}">active</c:if>">
+                                        <a class="page-link"
+                                           href="<c:url value="/category?search=${search}&page=${status.index}"/>"> ${status.count} </a>
+                                    </li>
+                                </c:forEach>
+                            </c:if>
+                            <li class="page-item">
+                                <a href="<c:url value="/category?search=${search}&page=${nextPage}"/>"
+                                   class="page-link">
+                                    <i class="material-icons">chevron_right</i>
+                                </a>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -140,7 +166,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                <button type="button" value="" class="btn btn-link btn-confirm-delete">Save changes</button>
+                <button type="button" value="" class="btn btn-danger btn-confirm-delete">Yes</button>
             </div>
         </div>
     </div>
@@ -192,15 +218,4 @@
 </script>
 
 </body>
-
-<head>
-    <meta charset="utf-8"/>
-    <title>
-        Category
-    </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-          name='viewport'/>
-    <c:import url="../fragments/common-css.jsp"/>
-</head>
-
 </html>

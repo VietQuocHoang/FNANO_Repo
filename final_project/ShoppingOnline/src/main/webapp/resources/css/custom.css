@@ -1,0 +1,10 @@
+.pagination > li.page-item > a.page-link {
+    color: #9c27b0;
+}
+
+.pagination > li.page-item.active > a.page-link {
+    background-color: #9c27b0;
+    color: #ffffff;
+    font-weight: bolder;
+    border-radius: 50%;
+}

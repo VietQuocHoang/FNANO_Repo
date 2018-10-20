@@ -17,3 +17,4 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <!-- CSS Files -->
 <link href="<c:url value="/resources/vendor/css/material-dashboard.css?v=2.1.0"/>" rel="stylesheet"/>
+<link href="<c:url value="/resources/css/custom.css"/>" rel="stylesheet"/>

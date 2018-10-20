@@ -20,19 +20,19 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item active">
+            <li class="nav-item <c:if test="${param.position =='dashboard'}">active</c:if>">
                 <a class="nav-link" href="<c:url value="/"/>">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <c:if test="${param.position=='product'}">active</c:if>">
                 <a class="nav-link" href="<c:url value="/product"/>">
                     <i class="material-icons">work</i>
                     <p>Product</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <c:if test="${param.position=='category'}">active</c:if>">
                 <a class="nav-link" href="<c:url value="/category"/>">
                     <i class="material-icons">category</i>
                     <p>Category</p>

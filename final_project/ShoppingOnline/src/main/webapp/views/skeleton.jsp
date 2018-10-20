@@ -21,7 +21,9 @@
 
 <body class="">
 <div class="wrapper ">
-    <c:import url="fragments/sidebar.jsp"/>
+    <c:import url="fragments/sidebar.jsp">
+        <c:param name="position" value="skeleton"/>
+    </c:import>
     <div class="main-panel">
         <c:import url="fragments/navbar.jsp">
             <c:param name="navbarBrand" value="Skeleton"/>
