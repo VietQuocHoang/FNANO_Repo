@@ -27,13 +27,13 @@
                 </a>
             </li>
             <li class="nav-item <c:if test="${param.position=='product'}">active</c:if>">
-                <a class="nav-link" href="<c:url value="/product"/>">
+                <a class="nav-link" href="<c:url value="/product/"/>">
                     <i class="material-icons">work</i>
                     <p>Product</p>
                 </a>
             </li>
             <li class="nav-item <c:if test="${param.position=='category'}">active</c:if>">
-                <a class="nav-link" href="<c:url value="/category"/>">
+                <a class="nav-link" href="<c:url value="/category/"/>">
                     <i class="material-icons">category</i>
                     <p>Category</p>
                 </a>

@@ -43,7 +43,7 @@ public class ProductController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping("/index")
+    @GetMapping("")
     public ModelAndView index(@RequestParam(value = "page", required = false) Integer page,
                               @RequestParam(value = "search", required = false) String search,
                               @RequestParam(value = "categoryId", required = false) Integer categoryId) {
@@ -105,16 +105,16 @@ public class ProductController {
         return mav;
     }
 
-    @GetMapping("/details")
-    public ModelAndView details(@RequestParam("id") int id) {
+    @GetMapping("/{id}")
+    public ModelAndView details(@PathVariable("id") int id) {
         ModelAndView mav = new ModelAndView("/product/details");
         Product product = productRepository.findOne(id);
         mav.addObject("product", product);
         return mav;
     }
 
-    @GetMapping("/edit")
-    public ModelAndView edit(@RequestParam("id") int id) {
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable("id") int id) {
         ModelAndView mav = new ModelAndView("/product/edit");
         Product product = productRepository.findOne(id);
         List<Category> categoryList = categoryRepository.findAll();
@@ -133,7 +133,7 @@ public class ProductController {
             mav.addObject("categoryList", categoryList);
             return mav;
         }
-        ModelAndView mav = new ModelAndView("redirect:index");
+        ModelAndView mav = new ModelAndView("redirect:/product");
         MultipartFile file = product.getThumbnail();
         product.setFileName(file.getOriginalFilename());
         Product p = product.toProduct();
@@ -153,7 +153,7 @@ public class ProductController {
             mav.addObject("categoryList", categoryList);
             return mav;
         }
-        ModelAndView mav = new ModelAndView("redirect:index");
+        ModelAndView mav = new ModelAndView("redirect:/product");
         MultipartFile file = product.getThumbnail();
         saveFile(product, file);
         Product p = productRepository.findOne(product.getId());
@@ -171,7 +171,7 @@ public class ProductController {
 
     @GetMapping("/delete")
     public ModelAndView delete(@RequestParam("id") int id) {
-        ModelAndView mav = new ModelAndView("redirect:index");
+        ModelAndView mav = new ModelAndView("redirect:/product");
         productRepository.delete(id);
         return mav;
     }
