@@ -23,3 +23,7 @@
     background-color: transparent;
     cursor: not-allowed;
 }
+
+.btn-fill {
+    width: 100%;
+}

@@ -30,6 +30,8 @@ public class ProductController {
     @Value("${resources.imageFolder}")
     private String IMAGE_FOLDER;
 
+    private int PER_PAGE = 5;
+
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
 
@@ -62,8 +64,8 @@ public class ProductController {
         }
 
 
-        int maximumPage = (maximumCount / 2) - 1;
-        int remaining = maximumCount % 2;
+        int maximumPage = (maximumCount / PER_PAGE) - 1;
+        int remaining = maximumCount % PER_PAGE;
         if (remaining > 0) {
             maximumPage += 1;
         }
@@ -72,7 +74,7 @@ public class ProductController {
         }
 
         Sort sort = new Sort(Sort.Direction.ASC, "name");
-        Pageable pageable = new PageRequest(page, 2, sort);
+        Pageable pageable = new PageRequest(page, PER_PAGE, sort);
         List<Product> productList;
 
         if (categoryId != null) {

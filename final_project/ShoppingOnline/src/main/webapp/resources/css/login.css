@@ -1,0 +1,18 @@
+.login-card-container {
+    width: 90%;
+    min-height: 18em;
+    margin: 9em auto auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.login-card {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: auto;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    background: #ffffff;
+}

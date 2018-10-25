@@ -17,25 +17,34 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <c:import url="../fragments/common-css.jsp"/>
+    <%--login css--%>
+    <link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>"/>
 </head>
 
 <body class="">
-<div class="wrapper ">
-    <div class="main-panel">
-        <div class="content">
-            <div class="container-fluid">
-                <!-- your content here -->
-                <form action="<c:url value="/login"/>" method="post">
-                    <input type="text" name="username">
-                    <input type="password" name="password">
-                    <input type="submit" value="submit">
-                </form>
-            </div>
+<div class="login-card-container">
+    <div class="login-card">
+        <div class="card-header card-header-primary text-center">
+            <h3 class="card-title">Login</h3>
+            <p class="card-category text-danger"><c:if test="${param.error != null}">Wrong username/password</c:if></p>
         </div>
-        <c:import url="../fragments/footer.jsp"/>
+        <form action="<c:url value="/login"/>" method="post">
+            <div class="card-body">
+                <div class="form-group bmd-form-group">
+                    <label>Username: </label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label>Password: </label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <div class="form-group bmd-form-group">
+                    <button type="submit" class="btn btn-primary btn-fill">Login</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
-<c:import url="../fragments/common-js.jsp"/>
 </body>
-
+<c:import url="../fragments/common-js.jsp"/>
 </html>

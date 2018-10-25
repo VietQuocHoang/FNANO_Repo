@@ -3,6 +3,7 @@ package com.viethq.shoppingonline.routes.controller;
 import com.viethq.shoppingonline.model.cart.Cart;
 import com.viethq.shoppingonline.model.cart.CartItem;
 import com.viethq.shoppingonline.services.CartService;
+import com.viethq.shoppingonline.utils.routes.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/shop")
+@RequestMapping("/cart")
 public class ShoppingController {
 
 
@@ -22,6 +23,16 @@ public class ShoppingController {
     @Autowired
     public void setCartService(CartService cartService) {
         this.cartService = cartService;
+    }
+
+
+    @GetMapping("")
+    private ModelAndView index(HttpSession session) {
+        Cart cart = (Cart) session.getAttribute("cart");
+        ModelAndView mav = new ModelAndView("/shop/index");
+        cartService.updateProductList(cart);
+        session.setAttribute("cart", cart);
+        return mav;
     }
 
     @GetMapping("/order")
@@ -37,17 +48,9 @@ public class ShoppingController {
         cartItem.setQuantity(quantity);
         cart.addCartItem(cartItem);
         session.setAttribute("cart", cart);
-        return new ModelAndView("redirect:index");
+        return new ModelAndView(URL.REDIRECT_CART);
     }
 
-    @GetMapping("/index")
-    private ModelAndView index(HttpSession session) {
-        Cart cart = (Cart) session.getAttribute("cart");
-        ModelAndView mav = new ModelAndView("/shop/index");
-        cartService.updateProductList(cart);
-        session.setAttribute("cart", cart);
-        return mav;
-    }
 
     @GetMapping("/remove")
     private ModelAndView remove(@RequestParam("productId") int productId, HttpSession session) {

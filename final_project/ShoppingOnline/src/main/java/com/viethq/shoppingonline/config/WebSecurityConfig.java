@@ -54,12 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .mvcMatchers("/", "/login").permitAll()
-                .mvcMatchers("/product/**", "/category/**").hasRole("ADMIN")
+                .mvcMatchers("/product/**", "/category/**", "/dashboard/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/product")
+                .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").successHandler(new CustomAuthenticationSuccess())
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/403denied");
     }
