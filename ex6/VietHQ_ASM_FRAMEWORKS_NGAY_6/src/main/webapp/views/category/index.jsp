@@ -32,5 +32,6 @@
         </tr>
     </c:forEach>
 </table>
+<h3 style="color:red">${error}</h3>
 </body>
 </html>
