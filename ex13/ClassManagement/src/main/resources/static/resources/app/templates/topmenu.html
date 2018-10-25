@@ -1,0 +1,42 @@
+<!-- navigator -->
+<nav class="navbar navbar-default navbar-fixed" ng-controller="TopController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="" ui-sref="admin">Dashboard</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle">
+                        <i class="fa fa-globe"></i>
+                        <b class="caret"></b>
+                        <span class="notification">5</span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="" ui-sref="profile">
+                        <img src="resources/themes/lbd/assets/img/profile.png" class="img-circle" alt="Cinque Terre"
+                             width="32" height="32"> Welcome, {{currentUser.name}}
+                    </a>
+                </li>
+
+                <li style="margin-top: 7px;">
+                    <a href="" ui-sref="login">
+                        {{currentUser.statusLogin}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
