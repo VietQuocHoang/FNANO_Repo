@@ -90,8 +90,9 @@
                                                         $ ${sessionScope.cart.totalPrice}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="7" class="text-right"><a href="#"
-                                                                                          class="btn btn-info btn-round">Complete
+                                                    <td colspan="7" class="text-right"><a
+                                                            href="<c:url value="/cart/finish"/>"
+                                                            class="btn btn-info btn-round">Complete
                                                         order</a></td>
                                                 </tr>
                                             </c:when>

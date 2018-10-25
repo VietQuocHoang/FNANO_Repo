@@ -1,5 +1,6 @@
 package com.viethq.shoppingonline.routes.controller;
 
+import com.viethq.shoppingonline.entities.User;
 import com.viethq.shoppingonline.model.cart.Cart;
 import com.viethq.shoppingonline.model.cart.CartItem;
 import com.viethq.shoppingonline.services.CartService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/cart")
@@ -58,6 +60,20 @@ public class ShoppingController {
         cart.removeCartItem(productId);
         session.setAttribute("cart", cart);
         return new ModelAndView("/shop/index");
+    }
+
+
+    @GetMapping("/finish")
+    private ModelAndView finishOrder(Principal principal, HttpSession session) {
+        if (principal == null) {
+            return new ModelAndView("/403denied");
+        }
+        String username = principal.getName();
+        User user = cartService.findUserByUsername(username);
+        Cart cart = (Cart) session.getAttribute("cart");
+        cartService.saveOrder(cart, user);
+        session.setAttribute("cart", new Cart());
+        return new ModelAndView(URL.REDIRECT_HOME);
     }
 
 }

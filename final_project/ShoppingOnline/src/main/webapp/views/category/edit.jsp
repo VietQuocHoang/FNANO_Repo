@@ -35,7 +35,7 @@
                 <!-- your content here -->
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4>Create ${category.name}</h4>
+                        <h4>Edit ${category.name}</h4>
                         <p class="card-category">Please fill in all details below</p>
                     </div>
                     <form:form modelAttribute="category" method="post"

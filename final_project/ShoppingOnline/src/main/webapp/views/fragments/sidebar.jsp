@@ -60,6 +60,12 @@
                         <p>My cart</p>
                     </a>
                 </li>
+                <li class="nav-item <c:if test="${param.position=='history'}">active</c:if>">
+                    <a class="nav-link" href="<c:url value="/history/"/>">
+                        <i class="material-icons">history</i>
+                        <p>Order History</p>
+                    </a>
+                </li>
             </sec:authorize>
 
             <!-- your sidebar here -->

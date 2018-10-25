@@ -24,9 +24,8 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <sec:authorize access="hasRole('ROLE_USER') and isAuthenticated()">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="<c:url value="/cart"/>" id="navbarDropdownMenuLink"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/cart"/>">
                             <i class="material-icons">shopping_cart</i>
                             <c:if test="${not empty sessionScope.cart && not empty sessionScope.cart.cartItemList}">
                                 <span class="notification">${sessionScope.cart.cartItemList.size()}</span>
