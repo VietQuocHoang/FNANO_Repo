@@ -14,6 +14,7 @@ public class Product {
     private int amount;
     private String thumbnail;
     private Category category;
+    private boolean enabled = true;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,5 +82,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Column(name = "enabled")
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -43,6 +43,12 @@
                         <p>Category</p>
                     </a>
                 </li>
+                <li class="nav-item <c:if test="${param.position=='user'}">active</c:if>">
+                    <a class="nav-link" href="<c:url value="/user/"/>">
+                        <i class="material-icons">people</i>
+                        <p>User</p>
+                    </a>
+                </li>
             </sec:authorize>
 
 

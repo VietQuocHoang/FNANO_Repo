@@ -1,8 +1,10 @@
 package com.viethq.shoppingonline.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tblUser")
@@ -12,14 +14,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "username", unique = true, length = 45)
     private String username;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
-    private boolean enabled;
+    private boolean enabled = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
@@ -49,8 +55,11 @@ public class User {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
+    }
+
+    public void encodePassword() {
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 
     public boolean isEnabled() {

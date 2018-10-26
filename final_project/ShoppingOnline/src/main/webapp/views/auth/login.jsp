@@ -38,8 +38,9 @@
                     <label>Password: </label>
                     <input type="password" class="form-control" name="password">
                 </div>
-                <div class="form-group bmd-form-group">
+                <div class="form-group bmd-form-group text-center">
                     <button type="submit" class="btn btn-primary btn-fill">Login</button>
+                    <a href="<c:url value="/register"/>">Don't have account?</a>
                 </div>
             </div>
         </form>

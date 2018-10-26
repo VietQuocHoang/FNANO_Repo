@@ -56,7 +56,9 @@ public class CategoryAPI {
         if (productList != null && !productList.isEmpty()) {
             return new ResponseEntity("Please delete all product with category = " + id + " before proceeding", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
         } else {
-            categoryRepository.delete(id);
+            Category category = categoryRepository.findOne(id);
+            category.setEnabled(false);
+            categoryRepository.save(category);
             return new ResponseEntity("Delete successfully", HttpStatus.OK);
         }
     }

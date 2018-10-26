@@ -14,9 +14,9 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     Category findById(int id);
 
-    @Query("Select c from Category c where lower(c.name) like concat('%', lower(:name), '%')")
+    @Query("Select c from Category c where lower(c.name) like concat('%', lower(:name), '%') and c.enabled=true")
     List<Category> findAndPaging(@Param("name") String name, Pageable pageable);
 
-    @Query("Select count(c) from Category c where lower(c.name) like concat('%', lower(:name),'%')")
+    @Query("Select count(c) from Category c where lower(c.name) like concat('%', lower(:name),'%') and c.enabled=true")
     int searchByNameAndcount(@Param("name") String name);
 }

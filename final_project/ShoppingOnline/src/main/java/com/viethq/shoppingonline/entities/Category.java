@@ -17,6 +17,9 @@ public class Category {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "enabled")
+    private boolean enabled = true;
+
     public Category() {
     }
 
@@ -34,5 +37,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

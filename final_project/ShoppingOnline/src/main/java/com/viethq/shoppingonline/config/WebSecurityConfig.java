@@ -53,8 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .mvcMatchers("/", "/login", "/api/user").permitAll()
-                .mvcMatchers("/product/**", "/category/**", "/dashboard/**").hasRole("ADMIN")
+                .mvcMatchers("/", "/login", "/register/**").permitAll()
+                .mvcMatchers("/product/**", "/category/**", "/dashboard/**", "/user/**").hasRole("ADMIN")
                 .mvcMatchers("/home/**", "/cart/**", "/history/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()

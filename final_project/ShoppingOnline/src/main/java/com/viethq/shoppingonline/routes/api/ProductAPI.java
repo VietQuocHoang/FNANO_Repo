@@ -42,7 +42,9 @@ public class ProductAPI {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") int id) {
-        productRepository.delete(id);
+        Product product = productRepository.findOne(id);
+        product.setEnabled(false);
+        productRepository.save(product);
         return new ResponseEntity("Delete successfully", HttpStatus.OK);
     }
 }
