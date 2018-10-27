@@ -26,4 +26,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             "order by o.created_date desc limit 5", nativeQuery = true)
     List<Order> findTop5OrderByCreatedDate();
 
+    @Query(value = "select o from Order o order by o.createdDate desc")
+    List<Order> findAllSortByDateDesc();
 }

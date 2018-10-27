@@ -49,6 +49,12 @@
                         <p>User</p>
                     </a>
                 </li>
+                <li class="nav-item <c:if test="${param.position=='order'}">active</c:if>">
+                    <a class="nav-link" href="<c:url value="/order/"/>">
+                        <i class="material-icons">history</i>
+                        <p>Orders</p>
+                    </a>
+                </li>
             </sec:authorize>
 
 

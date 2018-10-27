@@ -55,11 +55,18 @@
                                                     <tr>
                                                         <td>Order</td>
                                                         <td>Total</td>
+                                                        <td></td>
                                                     </tr>
                                                     <c:forEach items="${user.orderList}" var="order">
                                                         <tr>
                                                             <td>${order.createdDate}</td>
                                                             <td>$ ${order.total}</td>
+                                                            <td>
+                                                                <a href="<c:url value="/order/${order.id}"/>"
+                                                                   class="btn btn-just-icon btn-link">
+                                                                    <i class="material-icons">more</i>
+                                                                </a>
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </table>
