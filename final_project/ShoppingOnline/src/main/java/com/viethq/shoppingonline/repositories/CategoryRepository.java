@@ -19,4 +19,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query("Select count(c) from Category c where lower(c.name) like concat('%', lower(:name),'%') and c.enabled=true")
     int searchByNameAndcount(@Param("name") String name);
+
+
+    @Query("Select count(c) from Category c")
+    int countAllCategory();
 }

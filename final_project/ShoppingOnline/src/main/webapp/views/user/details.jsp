@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: viet
@@ -42,6 +43,31 @@
                             <p><b>ID: </b> ${user.id}</p>
                             <p><b>Username: </b> ${user.username}</p>
                             <p><b>Role: </b> ${user.role.name}</p>
+                            <c:if test="${user.role.name.equals('ROLE_USER')}">
+                                <div class="row">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Order history</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>Order</td>
+                                                        <td>Total</td>
+                                                    </tr>
+                                                    <c:forEach items="${user.orderList}" var="order">
+                                                        <tr>
+                                                            <td>${order.createdDate}</td>
+                                                            <td>$ ${order.total}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div
+                            </c:if>
                         </div>
                         <div class="card-footer">
                             <a href="<c:url value="/user/"/>" class="btn btn-round btn-primary">Back to index</a>

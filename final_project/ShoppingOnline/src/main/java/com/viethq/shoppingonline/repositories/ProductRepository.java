@@ -31,4 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("Select p from Product p where p.id IN :ids and p.enabled=true")
     List<Product> findByProductIds(@Param("ids") Set<Integer> ids);
 
+    @Query("Select count(p) from Product p")
+    int countAllProduct();
+
 }

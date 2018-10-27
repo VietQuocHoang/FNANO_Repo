@@ -28,5 +28,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("Select count(u) from User u where u.username like concat('%', lower(:username), '%') and u.enabled=true")
     int countByNameAndSorting(@Param("username") String username);
 
+    @Query(value = "Select u.id, u.username, ou.numOfOrder " +
+            "from ShopDB.tblUser u, " +
+            "(Select o.user_id, count(o.id) as numOfOrder from ShopDB.tblOrder o group by o.user_id order by numOfOrder desc limit 5 ) ou " +
+            "where ou.user_id = u.id order by ou.numOfOrder desc", nativeQuery = true)
+    List<Object[]> findTopActiveUser();
 
 }
