@@ -34,4 +34,22 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("Select count(p) from Product p")
     int countAllProduct();
 
+    @Query(value = "Select  c.id, c.name, coalesce(sum(p.amount),0) as totalAmount " +
+            "from ShopDB.tblCategory c " +
+            "left outer join ShopDB.tblProduct p " +
+            "on p.category_id=c.id " +
+            "group by c.id " +
+            "order by totalAmount desc", nativeQuery = true)
+    List<Object[]> findProductAmountPerCategory();
+
+    @Query(value = "Select  c.id, c.name, coalesce(count(p.id),0) as totalAmount " +
+            "from ShopDB.tblCategory c " +
+            "left outer join ShopDB.tblProduct p " +
+            "on p.category_id=c.id " +
+            "group by c.id " +
+            "order by totalAmount desc", nativeQuery = true)
+    List<Object[]> findProductPerCategory();
+
+
+
 }

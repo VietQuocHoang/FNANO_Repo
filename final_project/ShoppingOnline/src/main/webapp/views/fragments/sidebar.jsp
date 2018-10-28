@@ -55,6 +55,12 @@
                         <p>Orders</p>
                     </a>
                 </li>
+                <li class="nav-item <c:if test="${param.position=='report'}">active</c:if>">
+                    <a class="nav-link" href="<c:url value="/report"/>">
+                        <i class="material-icons">report</i>
+                        <p>Report</p>
+                    </a>
+                </li>
             </sec:authorize>
 
 
