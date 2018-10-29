@@ -31,7 +31,7 @@ public class ProductWithImageModel {
     }
 
     @NotNull
-    @Size(min = 5, max = 10)
+    @Size(min = 5, max = 20)
     public String getName() {
         return name;
     }

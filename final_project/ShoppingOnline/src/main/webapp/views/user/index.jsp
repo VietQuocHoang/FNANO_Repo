@@ -76,16 +76,16 @@
                                     <table class="table">
                                         <thead class="text-primary">
                                         <tr>
-                                            <td>ID</td>
+                                            <td>#</td>
                                             <td>Username</td>
                                             <td>Role</td>
                                             <td></td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${userList}" var="user">
+                                        <c:forEach items="${userList}" var="user" varStatus="status">
                                             <tr data-category-id="${user.id}">
-                                                <td>${user.id}</td>
+                                                <td>${status.count}</td>
                                                 <td>${user.username}</td>
                                                 <td>${user.role.name}</td>
                                                 <td class="td-actions text-right">

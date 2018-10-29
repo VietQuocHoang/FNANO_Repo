@@ -1,9 +1,9 @@
 package com.viethq.shoppingonline.model.report;
 
-public class ProductPerCategoryItemModel {
+public class PieChartItem {
     private int id;
     private String name;
-    private int amount;
+    private int value;
 
     public int getId() {
         return id;
@@ -21,17 +21,18 @@ public class ProductPerCategoryItemModel {
         this.name = name;
     }
 
-    public int getAmount() {
-        return amount;
+
+    public int getValue() {
+        return value;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void fromObjects(Object[] objects) {
         id = Integer.parseInt(String.valueOf(objects[0]));
         name = String.valueOf(objects[1]);
-        amount = Integer.parseInt(String.valueOf(objects[2]));
+        value = Integer.parseInt(String.valueOf(objects[2]));
     }
 }

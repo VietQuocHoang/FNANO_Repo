@@ -43,6 +43,7 @@
                                     <table class="table">
                                         <tr>
                                             <th>#</th>
+                                            <th>Order ID</th>
                                             <th>User</th>
                                             <th>Order Date</th>
                                             <th>Total</th>
@@ -51,8 +52,10 @@
                                         <c:forEach items="${orderList}" var="order" varStatus="status">
                                             <tr>
                                                 <td>${status.count}</td>
+                                                <td>${order.id}</td>
                                                 <td>${order.user.username}</td>
-                                                <td>${order.total}</td>
+                                                <td>${order.createdDate}</td>
+                                                <td>$ ${order.total}</td>
                                                 <td>
                                                     <a href="<c:url value="/order/${order.id}"/>"
                                                        class="btn btn-just-icon btn-link">

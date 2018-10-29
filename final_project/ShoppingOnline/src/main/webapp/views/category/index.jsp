@@ -62,15 +62,15 @@
                                     <table class="table">
                                         <thead class="text-primary">
                                         <tr>
-                                            <td>ID</td>
+                                            <td>#</td>
                                             <td>Name</td>
                                             <td></td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${categoryList}" var="category">
+                                        <c:forEach items="${categoryList}" var="category" varStatus="status">
                                             <tr data-category-id="${category.id}">
-                                                <td>${category.id}</td>
+                                                <td>${status.count}</td>
                                                 <td>${category.name}</td>
                                                 <td class="td-actions text-right">
                                                     <a href="<c:url value="/category/${category.id}"/>"

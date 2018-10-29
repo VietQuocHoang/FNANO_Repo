@@ -51,5 +51,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Object[]> findProductPerCategory();
 
 
+    @Query(value = "Select c.id, c.name, coalesce(max(p.price), 0) as maxPrice, coalesce(min(p.price), 0) as minPrice, coalesce(avg(p.price), 0) as avgPrice " +
+            "from ShopDB.tblCategory c " +
+            "left outer join ShopDB.tblProduct p " +
+            "on p.category_id = c.id " +
+            "group by c.id", nativeQuery = true)
+    List<Object[]> findProductMaxMinAvgByCategory();
+
 
 }

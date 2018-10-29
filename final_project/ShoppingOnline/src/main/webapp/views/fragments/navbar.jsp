@@ -45,7 +45,7 @@
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropDown">
-                        <a class="dropdown-item" href="#">My Profile
+                        <%--<a class="dropdown-item" href="#">My Profile--%>
                         </a>
                         <a class="dropdown-item" href='#' data-toggle="modal" data-target="#logoutModal">Log Out <i
                                 class="material-icons">exit_to_app</i>

@@ -13,7 +13,7 @@ public class Category {
     private int id;
 
     @NotNull
-    @Size(min = 5, max = 10)
+    @Size(min = 5, max = 20)
     @Column(name = "name")
     private String name;
 

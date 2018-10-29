@@ -77,7 +77,7 @@
                                     <table class="table">
                                         <thead class="text-primary">
                                         <tr>
-                                            <td>ID</td>
+                                            <td>#</td>
                                             <td>Name</td>
                                             <td>Category</td>
                                             <td>Thumbnail</td>
@@ -86,9 +86,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${productList}" var="product">
+                                        <c:forEach items="${productList}" var="product" varStatus="status">
                                             <tr data-category-id="${product.id}">
-                                                <td>${product.id}</td>
+                                                <td>${status.count}</td>
                                                 <td>${product.name}</td>
                                                 <td>${product.category.name}</td>
                                                 <td>$ ${product.price}</td>

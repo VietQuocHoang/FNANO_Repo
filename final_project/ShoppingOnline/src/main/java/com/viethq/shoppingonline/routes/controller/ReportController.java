@@ -1,6 +1,7 @@
 package com.viethq.shoppingonline.routes.controller;
 
-import com.viethq.shoppingonline.model.report.ProductPerCategoryModel;
+import com.viethq.shoppingonline.model.report.PieChart;
+import com.viethq.shoppingonline.model.report.ProductLineChart;
 import com.viethq.shoppingonline.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,12 @@ public class ReportController {
     @GetMapping("")
     public ModelAndView productPerCategory() {
         ModelAndView mav = new ModelAndView("report/report");
-        ProductPerCategoryModel productAmountPerCategoryReport = reportService.getProductAmountPerCategoryReport();
-        ProductPerCategoryModel productPerCategoryModel = reportService.getProductPerCategoryReport();
-        mav.addObject("productAmountModel", productAmountPerCategoryReport);
-        mav.addObject("productModel", productPerCategoryModel);
+        PieChart productAmountModel = reportService.getProductAmountPerCategoryReport();
+        PieChart productModel = reportService.getProductPerCategoryReport();
+        ProductLineChart productLineChart = reportService.getProductLineChartReport();
+        mav.addObject("minMaxAvgProduct", productLineChart);
+        mav.addObject("productAmountModel", productAmountModel);
+        mav.addObject("productModel", productModel);
         return mav;
     }
 }

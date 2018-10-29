@@ -52,11 +52,11 @@
                                                 <td class="text-center">
                                                     <c:choose>
                                                         <c:when test="${orderDetail.product.thumbnail != null && orderDetail.product.thumbnail !=''}">
-                                                            <img class="img-thumbnail-sm"
+                                                            <img class="img-thumbnail-md"
                                                                  src="<c:url value="/image/${orderDetail.product.id}/${orderDetail.product.thumbnail}"/> ">
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <img class="img-thumbnail-sm"
+                                                            <img class="img-thumbnail-md"
                                                                  src="<c:url value="/image/common/not-available.jpg"/>">
                                                         </c:otherwise>
                                                     </c:choose>
