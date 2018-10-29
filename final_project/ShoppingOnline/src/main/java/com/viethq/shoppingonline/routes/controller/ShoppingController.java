@@ -48,7 +48,7 @@ public class ShoppingController {
         CartItem cartItem = new CartItem();
         cartItem.setProductId(productId);
         cartItem.setQuantity(quantity);
-        cart.addCartItem(cartItem);
+        cartService.appendCartItem(cart, cartItem);
         session.setAttribute("cart", cart);
         return new ModelAndView(URL.REDIRECT_CART);
     }

@@ -58,13 +58,20 @@
                                 <p>$ ${product.price}</p>
                             </div>
                             <div class="card-footer">
-                                <a class="btn btn-fill btn-primary"
-                                   href="<c:url value="/cart/order?productId=${product.id}&quantity=1"/>">
-                                    Add to cart
-                                    <i class="material-icons">
-                                        add_shopping_cart
-                                    </i>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${product.amount > 0}">
+                                        <a class="btn btn-fill btn-primary"
+                                           href="<c:url value="/cart/order?productId=${product.id}&quantity=1"/>">
+                                            Add to cart
+                                            <i class="material-icons">
+                                                add_shopping_cart
+                                            </i>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="text-danger">Sorry, we're out of stock</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

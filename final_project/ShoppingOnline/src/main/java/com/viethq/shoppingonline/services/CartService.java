@@ -74,13 +74,37 @@ public class CartService {
         order.setTotal(cartList.getTotalPrice());
         order = orderRepository.save(order);
         List<OrderDetails> orderDetailsList = new ArrayList<>();
+        Set<Integer> productIdsList = new HashSet<>();
         for (CartItem c : cartList.getCartItemList()) {
             OrderDetails orderDetails = new OrderDetails();
             orderDetails.setOrder(order);
             orderDetails.setProduct(c.getProduct());
             orderDetails.setAmount(c.getQuantity());
             orderDetailsList.add(orderDetails);
+            //Add ids to later update the product's amount
+            productIdsList.add(c.getProductId());
         }
+        List<Product> productList = productRepository.findByProductIds(productIdsList);
+        updateProductListAmount(productList, cartList.getCartItemList());
         orderDetailRepository.save(orderDetailsList);
+    }
+
+    private void updateProductListAmount(List<Product> productList, List<CartItem> cartItemList) {
+        for (int i = 0; i < cartItemList.size(); i++) {
+            Product p = productList.get(i);
+            CartItem c = cartItemList.get(i);
+            int updatedAmount = p.getAmount() - c.getQuantity();
+            if (updatedAmount < 0) {
+                updatedAmount = 0;
+            }
+            p.setAmount(updatedAmount);
+        }
+        productRepository.save(productList);
+
+    }
+
+    public void appendCartItem(Cart cart, CartItem cartItem) {
+        cart.addCartItem(cartItem);
+        updateProductList(cart);
     }
 }

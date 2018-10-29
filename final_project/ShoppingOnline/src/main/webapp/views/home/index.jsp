@@ -85,10 +85,18 @@
                                         <p class="product-price">$ ${product.price}</p>
                                     </div>
                                     <div class="product-action">
-                                        <a href="<c:url value="/cart/order?productId=${product.id}&quantity=1"/>"
-                                           class="btn btn-just-icon btn-link btn-sm">
-                                            <i class="material-icons">add_shopping_cart</i>
-                                        </a>
+                                        <c:choose>
+                                            <c:when test="${product.amount > 0}">
+                                                <a href="<c:url value="/cart/order?productId=${product.id}&quantity=1"/>"
+                                                   class="btn btn-just-icon btn-link btn-sm">
+                                                    <i class="material-icons">add_shopping_cart</i>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="text-danger">Sold out</span>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </div>
                                 </div>
                             </div>

@@ -23,7 +23,12 @@ public class Cart {
     public void addCartItem(CartItem cartItem) {
         CartItem existed = findCartItem(cartItem);
         if (existed != null) {
-            existed.setQuantity(existed.getQuantity() + cartItem.getQuantity());
+            int sum = existed.getQuantity() + cartItem.getQuantity();
+            if (existed.getProduct().getAmount() < sum) {
+                sum = existed.getProduct().getAmount();
+            }
+            existed.setQuantity(sum);
+
             if (existed.getQuantity() == 0) {
                 removeCartItem(existed);
             }

@@ -66,8 +66,12 @@
                                                         </td>
                                                         <td>${cartItem.product.name}</td>
                                                         <td>$ ${cartItem.product.price}</td>
-                                                        <td class="text-right">${cartItem.quantity}</td>
                                                         <td class="text-center">
+                                                                ${cartItem.quantity}
+                                                            <br>
+                                                            Stock available: ${cartItem.product.amount}
+                                                        </td>
+                                                        <td class="text-left">
                                                             <a class="btn btn-round btn-info"
                                                                href="<c:url value="/cart/order?productId=${cartItem.productId}&quantity=1"/>">+</a>
                                                             <a class="btn btn-round btn-info"
